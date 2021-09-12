@@ -32,3 +32,13 @@ export default {
     },
 }
 </script>
+
+<style>
+.charecters {
+    display: grid;
+    grid-template-columns: repeat( 3, 1fr );
+    gap: 3rem;
+    margin: 3rem 0;   
+}
+
+</style>
