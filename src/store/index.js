@@ -3,14 +3,14 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     characters: [],
-    charactersFilter: []
+    charactersFilters: []
   },
   mutations: {
     setCharacters( state, payload ) {
       state.characters = payload;
     },
     setCharactersFilters( state, payload ) {
-      state.characterFilters = payload;
+      state.charactersFilters = payload;
     }
   },
   actions: {
@@ -18,8 +18,9 @@ export default createStore({
       try {
         const response = await fetch( 'https://rickandmortyapi.com/api/character' );
         const data = await response.json();
-        commit( 'setCharacters', data );
-        commit( 'setCharactersFilters', data );
+        commit( 'setCharacters', data.results );
+        commit( 'setCharactersFilters', data.results );
+        console.log( data );
       } catch (error) {
         console.log( error );
       }
