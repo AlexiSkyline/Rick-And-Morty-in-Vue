@@ -20,10 +20,15 @@ export default createStore({
         const data = await response.json();
         commit( 'setCharacters', data.results );
         commit( 'setCharactersFilters', data.results );
-        console.log( data );
       } catch (error) {
         console.log( error );
       }
+    },
+    filterByStatus({ commit, state }, status ) {
+      const results = state.characters.filter((characters) => {
+        return characters.status.includes( status );
+      });
+      commit( 'setCharactersFilters', results );
     }
   },
   modules: {
