@@ -20,6 +20,7 @@ export default createStore({
         const data = await response.json();
         commit( 'setCharacters', data.results );
         commit( 'setCharactersFilters', data.results );
+        console.log( data.result );
       } catch (error) {
         console.log( error );
       }
@@ -27,6 +28,17 @@ export default createStore({
     filterByStatus({ commit, state }, status ) {
       const results = state.characters.filter((characters) => {
         return characters.status.includes( status );
+      });
+      commit( 'setCharactersFilters', results );
+    },
+    filterByName({ commit, state }, name ) {
+      const formatName = name.toLowerCase();
+      const results = state.characters.filter( (character) => {
+        const characterName = character.name.toLowerCase();
+
+        if( characterName.includes( formatName ) ) {
+          return character;
+        }
       });
       commit( 'setCharactersFilters', results );
     }
